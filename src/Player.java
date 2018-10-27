@@ -6,9 +6,9 @@ public class Player {
     private int balance = 50000; //balance default value
     private int currentPosition=0; //players current position on the map
     private boolean isPrison=false; //keeps the player's jail sutiation
-    private ArrayList<Property> propertys=new ArrayList<Property>(); //Keeps lands owned by players
+    private ArrayList<Square> propertys=new ArrayList<Square>(); //Keeps lands owned by players
 
-
+    
     public Player(String name){
         this.name=name;
     }
@@ -23,11 +23,11 @@ public class Player {
         balance-=amount;
     }
     // add the new land
-   public void addLand(Property newLand){
+   public void addLand(Square newLand){
        propertys.add(newLand);
    }
     //remove owned land
-   public void removeLand(Property land){
+   public void removeLand(Square land){
        propertys.remove(land);
    }
 
@@ -60,7 +60,7 @@ public class Player {
         return balance;
     }
 
-    public ArrayList<Property> getLandCards() {
+    public ArrayList<Square> getLandCards() {
         return propertys;
     }
 
