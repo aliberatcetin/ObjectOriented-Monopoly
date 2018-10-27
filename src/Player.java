@@ -48,6 +48,7 @@ public class Player {
         currentPosition=position;
    }
 
+    //move the player next position
 
 
     //getter and setter methods
@@ -64,11 +65,26 @@ public class Player {
         return propertys;
     }
 
+
     public boolean isPrison() {
         return isPrison;
     }
 
     public void setPrison(boolean prison) {
         isPrison = prison;
+    }
+
+
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
     }
 }
