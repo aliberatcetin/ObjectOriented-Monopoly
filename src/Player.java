@@ -6,9 +6,8 @@ public class Player {
     private int balance = 50000; //balance default value
     private int currentPosition = 0; //players current position on the map
     private boolean isPrison = false; //keeps the player's jail sutiation
-    private ArrayList<Arsa> arsas = new ArrayList<Arsa>(); //Keeps lands owned by players
-    private ArrayList<Ulasim> ulasims = new ArrayList<Ulasim>();
-    private ArrayList<Isletme> isletmes = new ArrayList<Isletme>();
+    private ArrayList<Saleable> arsas = new ArrayList<Saleable>(); //Keeps lands owned by players
+
 
     public Player(String name) {
         this.name = name;
@@ -25,26 +24,15 @@ public class Player {
     }
 
     // add the new land
-    public void addArsa(Arsa newArsa) {
-        arsas.add(newArsa);
-    }
-    public void addUlasim(Ulasim newUlasim) {
-        ulasims.add(newUlasim);
-    }
-    public void addIsletme(Isletme newisletme) {
-        isletmes.add(newisletme);
+    public void addSaleable(Saleable newSaleable) {
+        arsas.add(newSaleable);
     }
 
     //remove owned land
-    public void removeArsa(Arsa arsa) {
-        arsas.remove(arsa);
+    public void removeSaleable(Saleable saleable) {
+        arsas.remove(saleable);
     }
-    public void removeUlasim(Ulasim ulasim) {
-        ulasims.remove(ulasim);
-    }
-    public void removeIsletme(Isletme isletme) {
-        isletmes.remove(isletme);
-    }
+
 
     //move the player next position
 

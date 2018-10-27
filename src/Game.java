@@ -30,8 +30,7 @@ public class Game {
     }
 
     private int[] rollDices(){
-        int[] dices={(int)(Math.random()*6+1),(int)(Math.random()*6+1)};
-        return dices;
+        return new int[] {(int) (Math.random() * 6 + 1), (int) (Math.random() * 6 + 1)};
     }
 
     private void move(Player player ,int diceNumber) {
@@ -42,9 +41,19 @@ public class Game {
             player.setPrison(true);
             player.setCurrentPosition(10);
         }
-        /*if(board.getSquare(player.getCurrentPosition())instanceof Saleable){
 
-        }*/
+        SquareEvent(player);
+    }
+
+    private void SquareEvent(Player player){
+        if(board.getSquare(player.getCurrentPosition())instanceof Saleable){  // karenın satın alınabilir olup olmadığına bakıyoruz
+            Saleable saleable =new Saleable();
+            if (saleable.getSaledBefore==false){ //daha önce satılıp satılmadığını kontrol ediyoruz
+                buySaleable(player,saleable);
+            }else{
+                doPayment(player,saleable); //daha önce alınmışsa kira ödemesi yapıyoruz
+            }
+        }
     }
 
     //teleport user when take luck cards
@@ -79,7 +88,6 @@ public class Game {
 
         System.out.println(players.get(0).getName()+" will be begin!");
     }
-
 
     private void RoundLastPlayer(){
         int dices[];
@@ -125,6 +133,32 @@ public class Game {
 
 
     }
+
+    private void buySaleable(Player player, Saleable saleable){
+        if(player.getBalance()>=saleable.PurchasePrice){
+            if(player.getName().equals(playerName)){
+                System.out.println("Dou u want to "+saleable.getName()+"(y/n)");
+                if(scan.next().equals("y")){
+                    player.addSaleable(saleable);
+                    saleable.setOwner(player);
+                    player.reduceBalance(saleable.getPrice());
+                }
+            }else{
+                player.addSaleable(saleable);
+                saleable.setOwner(player);
+                player.reduceBalance(saleable.getPrice());
+            }
+        }else{
+            System.out.println(player.getName()+"cant buy "+saleable.getName()+" Its expensive.");
+        }
+
+    }
+
+    private void doPayment(Player player,Saleable saleable){
+        player.reduceBalance(saleable.getRent());
+        saleable.getOwner().addBalance(saleable.getRent());
+    }
+
     public void run(int roundNumber){
         boolean checkPlayer=false;
         int currentRound=0;
