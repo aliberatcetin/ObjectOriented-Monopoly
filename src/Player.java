@@ -6,8 +6,9 @@ public class Player {
     private int balance = 50000; //balance default value
     private int currentPosition = 0; //players current position on the map
     private boolean isPrison = false; //keeps the player's jail sutiation
-    private ArrayList<Property> propertys = new ArrayList<Property>(); //Keeps lands owned by players
-
+    private ArrayList<Arsa> arsas = new ArrayList<Arsa>(); //Keeps lands owned by players
+    private ArrayList<Ulasim> ulasims = new ArrayList<Ulasim>();
+    private ArrayList<Isletme> isletmes = new ArrayList<Isletme>();
 
     public Player(String name) {
         this.name = name;
@@ -24,13 +25,25 @@ public class Player {
     }
 
     // add the new land
-    public void addLand(Property newLand) {
-        propertys.add(newLand);
+    public void addArsa(Arsa newArsa) {
+        arsas.add(newArsa);
+    }
+    public void addUlasim(Ulasim newUlasim) {
+        ulasims.add(newUlasim);
+    }
+    public void addIsletme(Isletme newisletme) {
+        isletmes.add(newisletme);
     }
 
     //remove owned land
-    public void removeLand(Property land) {
-        propertys.remove(land);
+    public void removeArsa(Arsa arsa) {
+        arsas.remove(arsa);
+    }
+    public void removeUlasim(Ulasim ulasim) {
+        ulasims.remove(ulasim);
+    }
+    public void removeIsletme(Isletme isletme) {
+        isletmes.remove(isletme);
     }
 
     //move the player next position
@@ -47,9 +60,7 @@ public class Player {
         return balance;
     }
 
-    public ArrayList<Property> getLandCards() {
-        return propertys;
-    }
+
 
     public boolean isPrison() {
         return isPrison;
@@ -63,9 +74,6 @@ public class Player {
         return currentPosition;
     }
 
-    public ArrayList<Property> getPropertys() {
-        return propertys;
-    }
 
     public void setBalance(int balance) {
         this.balance = balance;
@@ -75,7 +83,5 @@ public class Player {
         this.currentPosition = currentPosition;
     }
 
-    public void setPropertys(ArrayList<Property> propertys) {
-        this.propertys = propertys;
-    }
+
 }

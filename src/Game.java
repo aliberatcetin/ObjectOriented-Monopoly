@@ -1,10 +1,12 @@
-import java.sql.SQLOutput;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
+    String playerName;
     private ArrayList<Player> players = new ArrayList<Player>();
     Scanner scan =new Scanner(System.in);
+    Map board =new Map();
 
     public Game(String playerName, int numOfPlayer) {
         createComputer(numOfPlayer);
@@ -13,6 +15,7 @@ public class Game {
 
 
     private Player createPlayer(String name) {
+        playerName=name;
         return new Player(name);
     }
 
@@ -39,8 +42,9 @@ public class Game {
             player.setPrison(true);
             player.setCurrentPosition(10);
         }
+        /*if(board.getSquare(player.getCurrentPosition())instanceof Saleable){
 
-
+        }*/
     }
 
     //teleport user when take luck cards
@@ -69,39 +73,75 @@ public class Game {
 
         if(dices[0]+dices[1]>maxDice){
             players.add(0,players.get(players.size()-1));
-            players.remove(players.size());
+            players.remove(players.size()-1);
             maxDice=dices[0]+dices[1];
         }
 
         System.out.println(players.get(0).getName()+" will be begin!");
     }
 
-    public void run(int roundNumber){
-        int currentRound=0;
+
+    private void RoundLastPlayer(){
         int dices[];
         int totalDice;
-        decidePlayerOrder();
-        while(currentRound<=roundNumber){
-            for (int i = 0; i <players.size()-1 ; i++) {
-                dices=rollDices();
-                totalDice=dices[0]+dices[1];
-                System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
-                move(players.get(i),totalDice);
-                System.out.println("He is in "+players.get(i).getCurrentPosition()+" now.");
-            }
-
-            System.out.println("Press any button to roll a dice");
-            scan.next();
+        for (int i = 0; i <players.size()-1 ; i++) {
             dices=rollDices();
             totalDice=dices[0]+dices[1];
-            System.out.print(players.get(players.size()-1).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
-            move(players.get(players.size()-1),totalDice);
-            System.out.println("He is in "+players.get(players.size()-1).getCurrentPosition()+" now.");
+            System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
+            move(players.get(i),totalDice);
+            System.out.println("He is in "+players.get(i).getCurrentPosition()+" now.");
+        }
 
+        System.out.println("Press any button to roll a dice");
+        scan.next();
+        dices=rollDices();
+        totalDice=dices[0]+dices[1];
+        System.out.print(players.get(players.size()-1).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
+        move(players.get(players.size()-1),totalDice);
+        System.out.println("He is in "+players.get(players.size()-1).getCurrentPosition()+" now.");
+
+    }
+
+    private void RoundFirstPlayer(){
+        int dices[];
+        int totalDice;
+
+        System.out.println("Press any button to roll a dice");
+        scan.next();
+        dices=rollDices();
+        totalDice=dices[0]+dices[1];
+        System.out.print(players.get(0).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
+        move(players.get(0),totalDice);
+        System.out.println("He is in "+players.get(0).getCurrentPosition()+" now.");
+
+        for (int i = 1; i <players.size() ; i++) {
+            dices=rollDices();
+            totalDice=dices[0]+dices[1];
+            System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
+            move(players.get(i),totalDice);
+            System.out.println("He is in "+players.get(i).getCurrentPosition()+" now.");
+        }
+
+
+
+    }
+    public void run(int roundNumber){
+        boolean checkPlayer=false;
+        int currentRound=0;
+        if(players.size()>1) decidePlayerOrder();
+        if(players.get(0).getName().equals(playerName)) checkPlayer=true;
+        while(currentRound<=roundNumber){
+            if(checkPlayer){
+                RoundFirstPlayer();
+            }
+            else{
+                RoundLastPlayer();
+            }
 
             currentRound++;
             System.out.println("-------------------------------");
         }
 
     }
+
 }
