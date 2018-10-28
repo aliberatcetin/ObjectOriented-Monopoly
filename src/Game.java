@@ -52,12 +52,15 @@ public class Game {
     private void SquareEvent(Player player){
     	int position=player.getCurrentPosition();
     	Square tempSquare = board.getSquare(position);
+    	tempSquare.Speak(player);
         if(tempSquare instanceof Purchasable){  // karenın satın alınabilir olup olmadığına bakıyoruz
-        	if ( !(((Purchasable) tempSquare).isSold() ) ){ //daha önce satılıp satılmadığını kontrol ediyoruz
+        	if ( !(((Purchasable) tempSquare).isSold()) ){ //daha önce satılıp satılmadığını kontrol ediyoruz
                 buySaleable(player,(Purchasable)tempSquare);
             }else{
                 doPayment(player,(Purchasable)tempSquare); //daha önce alınmışsa kira ödemesi yapıyoruz
             }
+        }else{
+            System.out.println();
         }
     }
 
@@ -102,7 +105,7 @@ public class Game {
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
-            System.out.println("He is in "+players.get(i).getCurrentPosition()+" now.");
+
         }
 
         System.out.println("Press any button to roll a dice");
@@ -111,7 +114,7 @@ public class Game {
         totalDice=dices[0]+dices[1];
         System.out.print(players.get(players.size()-1).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
         move(players.get(players.size()-1),totalDice);
-        System.out.println("He is in "+players.get(players.size()-1).getCurrentPosition()+" now.");
+
 
     }
 
@@ -125,14 +128,13 @@ public class Game {
         totalDice=dices[0]+dices[1];
         System.out.print(players.get(0).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
         move(players.get(0),totalDice);
-        System.out.println("He is in "+players.get(0).getCurrentPosition()+" now.");
 
         for (int i = 1; i <players.size() ; i++) {
             dices=rollDices();
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
-            System.out.println("He is in "+players.get(i).getCurrentPosition()+" now.");
+
         }
 
 
@@ -144,16 +146,20 @@ public class Game {
             if(player.getName().equals(playerName)){
                 System.out.println("Dou u want to "+saleable.getName()+"(y/n)");
                 if(scan.next().equals("y")){
+                    player.reduceBalance(saleable.getPurchasePrice());
                     player.addProperty(saleable);
                     saleable.setOwner(player);
-                    player.reduceBalance(saleable.getPurchasePrice());
+                    saleable.setSold(true);
+                    System.out.print(player.getName()+" is purchase "+saleable.getName()+ ". ");
+                    System.out.println(player.getName()+"'s Balance:"+player.getBalance());
                 }
             }else{
+                player.reduceBalance(saleable.getPurchasePrice());
                 player.addProperty(saleable);
                 saleable.setOwner(player);
-                player.reduceBalance(saleable.getPurchasePrice());
-                System.out.println(player.getName()+" is purchase "+saleable.getName());
-                System.out.println(player.getPropertys().get(0).getName());
+                saleable.setSold(true);
+                System.out.print(player.getName()+" is purchase "+saleable.getName()+".");
+                System.out.println(player.getName()+"'s Balance:"+player.getBalance());
             }
 
         }else{

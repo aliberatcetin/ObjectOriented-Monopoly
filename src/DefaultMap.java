@@ -66,7 +66,7 @@ public class DefaultMap implements ISquareCreator {
 		addSquare( createProperty      (37,"levent","blue",350,3500,1750)  );
 		addSquare( createTax           (38,"tax","transparent") );
 		addSquare( createProperty      (39,"etiler","blue",500,4000,2000)  );	
-		System.out.print("map created");
+		//System.out.print("map created");
 	}
 	
 
