@@ -1,17 +1,15 @@
 public class Map {
 	
-	MapTypes Map = new MapTypes();
+	DefaultMap Map = new DefaultMap();
+	
     public Map() {
-    	
-    }
-    
-    public void setMap(MapTypes mt) {
-    	this.Map=mt;
+    	Map.createMap();
     }
     
     public Square getSquare(int position) {
     	return Map.getSquare(position);
     }
+    
     
    
     

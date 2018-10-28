@@ -12,9 +12,9 @@ public class main {
 
         System.out.println("kaç kişi oynucan paşam");
         int numberofPlayer=scan.nextInt();
-        DefaultMap dm = new DefaultMap();
-        Game game=new Game(name,numberofPlayer,dm);
-
+        //Map board = new Map();
+        Game game=new Game(name,numberofPlayer);
+        
         game.run(5);
     }
 

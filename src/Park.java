@@ -1,6 +1,6 @@
 
 public class Park extends UnSalable{
-	public Park(int position,String color,String name) {
-		super(position,color,name);
+	public Park(int position,String name,String color) {
+		super(position,name,color);
 	}
 }

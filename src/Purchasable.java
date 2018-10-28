@@ -15,8 +15,8 @@ public class Purchasable extends Square {
 	public Player getOwner() {
 		return owner;
 	}
-	public Purchasable(int position,String color,String name,int rentprice,int purchaseprice,int hypothecprice) {
-		super(position,color,name);
+	public Purchasable(int position,String name,String color,int rentprice,int purchaseprice,int hypothecprice) {
+		super(position,name,color);
 		this.RentPrice=rentprice;
 		this.PurchasePrice=purchaseprice;
 		this.HypothecPrice=hypothecprice;

@@ -5,7 +5,7 @@ public abstract class Square {
 	private String Color;
 	private String Name;
 	
-	public Square(int position,String color,String name) {
+	public Square(int position,String name,String color) {
 		this.Position=position;
 		this.Color=color;
 		this.Name=name;

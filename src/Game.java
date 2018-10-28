@@ -6,13 +6,15 @@ public class Game {
     String playerName;
     private ArrayList<Player> players = new ArrayList<Player>();
     Scanner scan =new Scanner(System.in);
+    //DefaultMap md = new DefaultMap();
+ 
     Map board = new Map();
     
 
-    public Game(String playerName, int numOfPlayer,DefaultMap dm) {
+    public Game(String playerName, int numOfPlayer) {
         createComputer(numOfPlayer);
         players.add(createPlayer(playerName));
-        board.setMap(dm);
+        
     }
 
 
