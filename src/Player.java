@@ -4,38 +4,55 @@ import java.util.ArrayList;
 public class Player {
     private String name; //Player's name
     private int balance = 50000; //balance default value
-    private int currentPosition = 0; //players current position on the map
-    private boolean isPrison = false; //keeps the player's jail sutiation
-    private ArrayList<Saleable> arsas = new ArrayList<Saleable>(); //Keeps lands owned by players
+    private int currentPosition=0; //players current position on the map
+    private boolean isPrison=false; //keeps the player's jail sutiation
+    private ArrayList<Square> propertys=new ArrayList<Square>(); //Keeps lands owned by players
 
-
-    public Player(String name) {
-        this.name = name;
+    
+    public Player(String name){
+        this.name=name;
+    }
+    
+    public void addProperty(Square square) {
+    	propertys.add(square);
     }
 
     // increase players balance
-    public void addBalance(int amount) {
-        balance += amount;
+    public void addBalance(int amount){
+        balance+=amount;
     }
 
     // decrease players balance
-    public void reduceBalance(int amount) {
-        balance -= amount;
+    public void reduceBalance(int amount){
+        balance-=amount;
     }
-
     // add the new land
-    public void addSaleable(Saleable newSaleable) {
-        arsas.add(newSaleable);
-    }
-
+   public void addLand(Square newLand){
+       propertys.add(newLand);
+   }
     //remove owned land
-    public void removeSaleable(Saleable saleable) {
-        arsas.remove(saleable);
-    }
+   public void removeLand(Square land){
+       propertys.remove(land);
+   }
 
+   //move the player next position
+   public void move(int diceNumber){
+        int prevPosition=currentPosition; //keep previous position
+        currentPosition=(currentPosition+diceNumber)%40;   //add the dice curren position
+        if(currentPosition<prevPosition) addBalance(2000); //if player pass the start point earn tour money
+        if(currentPosition==30){ //if player move to jail zone
+            setPrison(true);
+            currentPosition=10;
+        }
+
+
+   }
+    //teleport user when take luck cards
+   public void teleport(int position){
+        currentPosition=position;
+   }
 
     //move the player next position
-
 
 
     //getter and setter methods
@@ -48,6 +65,9 @@ public class Player {
         return balance;
     }
 
+    public ArrayList<Square> getLandCards() {
+        return propertys;
+    }
 
 
     public boolean isPrison() {
@@ -57,6 +77,7 @@ public class Player {
     public void setPrison(boolean prison) {
         isPrison = prison;
     }
+
 
     public int getCurrentPosition() {
         return currentPosition;
@@ -70,6 +91,4 @@ public class Player {
     public void setCurrentPosition(int currentPosition) {
         this.currentPosition = currentPosition;
     }
-
-
 }

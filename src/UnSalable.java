@@ -1,6 +1,6 @@
 
 public class UnSalable extends Square{
-	public UnSalable(int position,String color,String name) {
-		super(position,color,name);
+	public UnSalable(int position,String name,String color) {
+		super(position,name,color);
 	}
 }

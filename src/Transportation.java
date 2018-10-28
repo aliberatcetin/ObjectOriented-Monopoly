@@ -1,6 +1,6 @@
 
 public class Transportation extends Purchasable{
-	public Transportation(int position,String color,String name,int rentprice,int purchaseprice,int hypothecprice) {
-		super(position,color,name,rentprice,purchaseprice,hypothecprice);
+	public Transportation(int position,String name,String color,int rentprice,int purchaseprice,int hypothecprice) {
+		super(position,name,color,rentprice,purchaseprice,hypothecprice);
 	}
 }
