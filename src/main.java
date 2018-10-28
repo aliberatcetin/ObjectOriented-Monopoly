@@ -1,10 +1,9 @@
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class main {
 
     public static void main(String[] args) {
-        System.out.println(45%41);
          Scanner scan =new Scanner(System.in);
 
         System.out.println("Oyuna hoşgeldin paşam adın nedir?");

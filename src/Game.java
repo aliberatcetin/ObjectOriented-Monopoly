@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
-    String playerName;
+    private String playerName;
     private ArrayList<Player> players = new ArrayList<Player>();
-    Scanner scan =new Scanner(System.in);
+    private Scanner scan =new Scanner(System.in);
     //DefaultMap md = new DefaultMap();
  
-    Map board = new Map();
+    private Map board = new Map();
     
 
     public Game(String playerName, int numOfPlayer) {
@@ -152,7 +152,10 @@ public class Game {
                 player.addProperty(saleable);
                 saleable.setOwner(player);
                 player.reduceBalance(saleable.getPurchasePrice());
+                System.out.println(player.getName()+" is purchase "+saleable.getName());
+                System.out.println(player.getPropertys().get(0).getName());
             }
+
         }else{
             System.out.println(player.getName()+"cant buy "+saleable.getName()+" Its expensive.");
         }
