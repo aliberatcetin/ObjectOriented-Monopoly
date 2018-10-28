@@ -12,6 +12,10 @@ public class Player {
     public Player(String name){
         this.name=name;
     }
+    
+    public void addProperty(Square square) {
+    	propertys.add(square);
+    }
 
     // increase players balance
     public void addBalance(int amount){
