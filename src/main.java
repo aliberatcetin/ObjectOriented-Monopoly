@@ -13,7 +13,7 @@ public class main {
 
         Game game=new Game(name,numberofPlayer);
 
-        game.run(5);
+        game.run(6);
     }
 
 }
