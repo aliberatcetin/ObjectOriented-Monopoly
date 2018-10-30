@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Player {
     private String name; //Player's name
-    private int balance = 50000; //balance default value
+    private int balance = 10000; //balance default value
     private int currentPosition=0; //players current position on the map
     private boolean isPrison=false; //keeps the player's jail sutiation
     private ArrayList<Purchasable> propertys=new ArrayList<Purchasable>(); //Keeps lands owned by players

@@ -56,7 +56,7 @@ public class Game {
                 doPayment(player,(Purchasable)tempSquare); //daha önce alınmışsa kira ödemesi yapıyoruz
             }
         }else{
-            System.out.println();
+            ((UnSalable)tempSquare).event(player);
         }
     }
 
@@ -141,30 +141,30 @@ public class Game {
     }
 
     private void buySaleable(Player player,Purchasable saleable){
+        String choice="";
         if(player.getBalance()>=saleable.getPurchasePrice()){
             if(player.getName().equals(playerName)){
-                System.out.println("Dou u want to "+saleable.getName()+"(y/n)");
-                if(scan.next().equals("y")){
-                    player.reduceBalance(saleable.getPurchasePrice());
-                    player.addProperty(saleable);
-                    saleable.setOwner(player);
-                    saleable.setSold(true);
-                    System.out.print(player.getName()+" is purchase "+saleable.getName()+ ". ");
-                    System.out.println(player.getName()+"'s Balance:"+player.getBalance());
-                }
-            }else{
-                player.reduceBalance(saleable.getPurchasePrice());
-                player.addProperty(saleable);
-                saleable.setOwner(player);
-                saleable.setSold(true);
-                System.out.print(player.getName()+" is purchase "+saleable.getName()+".");
-                System.out.println(player.getName()+"'s Balance:"+player.getBalance());
+                System.out.println("Dou u want to "+saleable.getName()+"("+saleable.getPurchasePrice()+"$)"+"(y/n)");
+                 choice=scan.next();
             }
-
+        if(!choice.equals("n")){
+            player.reduceBalance(saleable.getPurchasePrice());
+            player.addProperty(saleable);
+            saleable.setOwner(player);
+            saleable.setSold(true);
+            System.out.print(player.getName()+" is purchase "+saleable.getName()+ "("+saleable.getPurchasePrice()+ "$)"+ ".");
+            System.out.println(player.getName()+"'s Balance:"+player.getBalance());
+        }
         }else{
             System.out.println(player.getName()+"cant buy "+saleable.getName()+" Its expensive.");
         }
 
+    }
+
+    private void sellSaleable(Player player,Purchasable saleable){
+        player.addBalance(saleable.getHypothecPrice());
+        player.removeProperty(saleable);
+        saleable.setSold(false);
     }
 
     private void doPayment(Player player,Purchasable saleable){
@@ -172,12 +172,43 @@ public class Game {
         saleable.getOwner().addBalance(saleable.getRentPrice());
     }
 
+    private void checkBalances(){
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getBalance()<0){
+                hypoteseSaleables(players.get(i));
+            }
+        }
+    }
+
+    private void hypoteseSaleables(Player player){
+        while(player.getBalance()<0){
+            if(player.getPropertys().size()>0){
+                if(!player.getName().equals(playerName)){
+                    sellSaleable(player,player.getPropertys().get(0));
+                }else{
+                    System.out.println("which property you want to sell ?");
+                    for (int i = 0; i <player.getPropertys().size() ; i++) {
+                        System.out.println(i+"-"+player.getPropertys().get(i).getName()+"("+player.getPropertys().get(i).getHypothecPrice()+"$)");
+                    }
+                    sellSaleable(player,player.getPropertys().get(scan.nextInt()));
+                }
+
+            }else{
+                System.out.println(player.getName()+ " go bankrupt.");
+            }
+
+        }
+    }
+
+
     public void run(int roundNumber){
         boolean checkPlayer=false;
         int currentRound=0;
         if(players.size()>1) decidePlayerOrder();
         if(players.get(0).getName().equals(playerName)) checkPlayer=true;
+
         while(currentRound<=roundNumber){
+            checkBalances();
             if(checkPlayer){
                 RoundFirstPlayer();
             }
