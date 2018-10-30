@@ -10,4 +10,16 @@ public class Tax extends UnSalable{
 		System.out.print(player.getName()+" moved to "+getName());
 		System.out.println(player.getName() +" will pay " + this.Tax+ " to the bank" );
 	}
+	public int getTax() {
+		return Tax;
+	}
+	public void setTax(int tax) {
+		Tax = tax;
+	}
+	@Override
+	public void event(Player player) {
+		player.reduceBalance(Tax);
+	}
+	
+	
 }
