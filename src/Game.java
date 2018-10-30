@@ -52,12 +52,23 @@ public class Game {
     private void SquareEvent(Player player){
     	int position=player.getCurrentPosition();
     	Square tempSquare = board.getSquare(position);
+<<<<<<< HEAD
         if(tempSquare instanceof Purchasable){  // karenın satın alınabilir olup olmadığına bakıyoruz
         	if ( !(((Purchasable) tempSquare).isSold() ) ){ //daha önce satılıp satılmadığını kontrol ediyoruz
+=======
+    	tempSquare.Speak(player);
+        if(tempSquare instanceof Purchasable){  // karenın satın alınabilir olup olmadığına bakıyoruz
+        	if ( !(((Purchasable) tempSquare).isSold()) ){ //daha önce satılıp satılmadığını kontrol ediyoruz
+>>>>>>> b1fa9f27fed36941f620c7a15f85875b3697cd57
                 buySaleable(player,(Purchasable)tempSquare);
             }else{
                 doPayment(player,(Purchasable)tempSquare); //daha önce alınmışsa kira ödemesi yapıyoruz
             }
+<<<<<<< HEAD
+=======
+        }else{
+            System.out.println();
+>>>>>>> b1fa9f27fed36941f620c7a15f85875b3697cd57
         }
     }
 
@@ -102,7 +113,11 @@ public class Game {
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
+<<<<<<< HEAD
             System.out.println("He is in "+players.get(i).getCurrentPosition()+" now.");
+=======
+
+>>>>>>> b1fa9f27fed36941f620c7a15f85875b3697cd57
         }
 
         System.out.println("Press any button to roll a dice");
@@ -111,7 +126,11 @@ public class Game {
         totalDice=dices[0]+dices[1];
         System.out.print(players.get(players.size()-1).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
         move(players.get(players.size()-1),totalDice);
+<<<<<<< HEAD
         System.out.println("He is in "+players.get(players.size()-1).getCurrentPosition()+" now.");
+=======
+
+>>>>>>> b1fa9f27fed36941f620c7a15f85875b3697cd57
 
     }
 
@@ -125,14 +144,21 @@ public class Game {
         totalDice=dices[0]+dices[1];
         System.out.print(players.get(0).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
         move(players.get(0),totalDice);
+<<<<<<< HEAD
         System.out.println("He is in "+players.get(0).getCurrentPosition()+" now.");
+=======
+>>>>>>> b1fa9f27fed36941f620c7a15f85875b3697cd57
 
         for (int i = 1; i <players.size() ; i++) {
             dices=rollDices();
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
+<<<<<<< HEAD
             System.out.println("He is in "+players.get(i).getCurrentPosition()+" now.");
+=======
+
+>>>>>>> b1fa9f27fed36941f620c7a15f85875b3697cd57
         }
 
 
@@ -144,6 +170,7 @@ public class Game {
             if(player.getName().equals(playerName)){
                 System.out.println("Dou u want to "+saleable.getName()+"(y/n)");
                 if(scan.next().equals("y")){
+<<<<<<< HEAD
                     player.addProperty(saleable);
                     saleable.setOwner(player);
                     player.reduceBalance(saleable.getPurchasePrice());
@@ -154,6 +181,22 @@ public class Game {
                 player.reduceBalance(saleable.getPurchasePrice());
                 System.out.println(player.getName()+" is purchase "+saleable.getName());
                 System.out.println(player.getPropertys().get(0).getName());
+=======
+                    player.reduceBalance(saleable.getPurchasePrice());
+                    player.addProperty(saleable);
+                    saleable.setOwner(player);
+                    saleable.setSold(true);
+                    System.out.print(player.getName()+" is purchase "+saleable.getName()+ ". ");
+                    System.out.println(player.getName()+"'s Balance:"+player.getBalance());
+                }
+            }else{
+                player.reduceBalance(saleable.getPurchasePrice());
+                player.addProperty(saleable);
+                saleable.setOwner(player);
+                saleable.setSold(true);
+                System.out.print(player.getName()+" is purchase "+saleable.getName()+".");
+                System.out.println(player.getName()+"'s Balance:"+player.getBalance());
+>>>>>>> b1fa9f27fed36941f620c7a15f85875b3697cd57
             }
 
         }else{

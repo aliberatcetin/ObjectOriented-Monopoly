@@ -9,14 +9,7 @@ public class Purchasable extends Square {
 	public boolean isSold() {
 		return isSold;
 	}
-	
-	public void setSold(boolean isSold) {
-		this.isSold = isSold;
-	}
-	
-	public Player getOwner() {
-		return owner;
-	}
+
 	
 	
 	
@@ -31,6 +24,14 @@ public class Purchasable extends Square {
 		}
 	}
 	
+
+	public void setSold(boolean isSold) {
+		this.isSold = isSold;
+	}
+	public Player getOwner() {
+		return owner;
+	}
+
 	public Purchasable(int position,String name,String color,int rentprice,int purchaseprice,int hypothecprice) {
 		super(position,name,color);
 		this.RentPrice=rentprice;
@@ -38,8 +39,6 @@ public class Purchasable extends Square {
 		this.HypothecPrice=hypothecprice;
 		this.isSold=false;
 	}
-	
-	
 
 	
 	public int getRentPrice() {

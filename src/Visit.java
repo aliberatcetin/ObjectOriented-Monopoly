@@ -4,6 +4,7 @@ public class Visit extends UnSalable{
 	public Visit(int position,String name,String color) {
 		super(position,name,color);
 	}
+
 	
 	@Override
 	public void Speak(Player player) {
@@ -11,4 +12,5 @@ public class Visit extends UnSalable{
 			System.out.println(player.getName()+"went to jail");
 		}
 	}
+
 }
