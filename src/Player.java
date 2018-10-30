@@ -6,11 +6,18 @@ public class Player {
     private int balance = 50000; //balance default value
     private int currentPosition=0; //players current position on the map
     private boolean isPrison=false; //keeps the player's jail sutiation
-    private ArrayList<Property> propertys=new ArrayList<Property>(); //Keeps lands owned by players
+    private ArrayList<Purchasable> propertys=new ArrayList<Purchasable>(); //Keeps lands owned by players
 
-
+    
     public Player(String name){
         this.name=name;
+    }
+    
+    public void addProperty(Purchasable newPurchasable) {
+    	propertys.add(newPurchasable);
+    }
+    public void removeProperty(Purchasable purchasable) {
+        propertys.remove(purchasable);
     }
 
     // increase players balance
@@ -22,31 +29,9 @@ public class Player {
     public void reduceBalance(int amount){
         balance-=amount;
     }
-    // add the new land
-   public void addLand(Property newLand){
-       propertys.add(newLand);
-   }
-    //remove owned land
-   public void removeLand(Property land){
-       propertys.remove(land);
-   }
-
-   //move the player next position
-   public void move(int diceNumber){
-        int prevPosition=currentPosition; //keep previous position
-        currentPosition=(currentPosition+diceNumber)%40;   //add the dice curren position
-        if(currentPosition<prevPosition) addBalance(2000); //if player pass the start point earn tour money
-        if(currentPosition==30){ //if player move to jail zone
-            setPrison(true);
-            currentPosition=10;
-        }
 
 
-   }
-    //teleport user when take luck cards
-   public void teleport(int position){
-        currentPosition=position;
-   }
+
 
 
 
@@ -60,9 +45,10 @@ public class Player {
         return balance;
     }
 
-    public ArrayList<Property> getLandCards() {
+    public ArrayList<Purchasable> getPropertys() {
         return propertys;
     }
+
 
     public boolean isPrison() {
         return isPrison;
@@ -70,5 +56,19 @@ public class Player {
 
     public void setPrison(boolean prison) {
         isPrison = prison;
+    }
+
+
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
     }
 }
