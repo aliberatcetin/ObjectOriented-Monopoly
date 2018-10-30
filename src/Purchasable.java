@@ -17,10 +17,10 @@ public class Purchasable extends Square {
 	@Override
 	public void Speak(Player player2) {
 		if ( isSold ) {
-			System.out.print(player2.getName()+"moved to" + getName() );
-			System.out.println(player2.getName() + "will pay the rent to the" + owner);
+			System.out.print(player2.getName()+" moved to " + getName() );
+			System.out.println(player2.getName() + " will pay the rent to the " + owner);
 		}else {
-			System.out.print(player2.getName()+"moved to" + getName() );
+			System.out.print(player2.getName()+" moved to " + getName() );
 		}
 	}
 	
