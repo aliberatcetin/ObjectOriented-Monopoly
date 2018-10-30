@@ -30,7 +30,44 @@ public class Player {
         balance-=amount;
     }
 
-
+    public boolean hasAllColors(Property prop) {
+    	int counter=0;
+    	for(int i=0;i<propertys.size();i++) {
+    		if( propertys.get(i).getColor().equals(prop.getColor()) ) {
+    			counter++;
+    		}
+    	}
+    	if(counter==prop.getTotalNeighbor()) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+    	
+    }
+    
+    public int howManyTransportation() {
+    	int counter=0;
+    	for(int i=0;i<propertys.size();i++) {
+    		if( propertys.get(i) instanceof Transportation ) {
+    			counter++;
+    		}
+    	}
+    	return counter;
+    }
+    public boolean hasAllFirm() {
+    	int counter=0;
+    	for(int i=0;i<propertys.size();i++) {
+    		if( propertys.get(i) instanceof Firm ) {
+    			counter++;
+    		}
+    	}
+    	if(counter==2) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+    }
+    
 
 
 

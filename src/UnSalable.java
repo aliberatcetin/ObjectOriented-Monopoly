@@ -1,5 +1,5 @@
 
-public abstract class UnSalable extends Square{
+public class UnSalable extends Square{
 	public UnSalable(int position,String name,String color) {
 		super(position,name,color);
 	}
@@ -8,5 +8,7 @@ public abstract class UnSalable extends Square{
 		
 	}
 	
-	public abstract void event(Player player);
+	public void event(Player player) {
+		
+	}
 }

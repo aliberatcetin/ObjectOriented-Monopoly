@@ -5,7 +5,14 @@ public class Purchasable extends Square {
 	private int HypothecPrice;
 	private Player owner;
 	private boolean isSold;
+	private int totalNeighbor;
 	
+	public int getTotalNeighbor() {
+		return totalNeighbor;
+	}
+	public void setTotalNeighbor(int totalNeighbor) {
+		this.totalNeighbor = totalNeighbor;
+	}
 	public boolean isSold() {
 		return isSold;
 	}
@@ -18,7 +25,7 @@ public class Purchasable extends Square {
 	public void Speak(Player player2) {
 		if ( isSold ) {
 			System.out.print(player2.getName()+" moved to " + getName() );
-			System.out.println(player2.getName() + " will pay the rent to the " + owner.getName());
+			System.out.print(player2.getName() + " will pay rent("+ RentPrice +"$)"  + owner.getName());
 		}else {
 			System.out.print(player2.getName()+" moved to " + getName() );
 		}
@@ -27,12 +34,13 @@ public class Purchasable extends Square {
 	public Player getOwner() {
 		return owner;
 	}
-	public Purchasable(int position,String name,String color,int rentprice,int purchaseprice,int hypothecprice) {
+	public Purchasable(int position,String name,String color,int rentprice,int purchaseprice,int hypothecprice,int tn) {
 		super(position,name,color);
 		this.RentPrice=rentprice;
 		this.PurchasePrice=purchaseprice;
 		this.HypothecPrice=hypothecprice;
 		this.isSold=false;
+		this.totalNeighbor=tn;
 	}
 	
 
