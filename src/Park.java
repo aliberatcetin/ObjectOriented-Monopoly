@@ -5,6 +5,6 @@ public class Park extends UnSalable{
 	}
 	@Override
 	public void Speak(Player player){
-		System.out.println(player.getName() + "moved park");
+		System.out.println(player.getName() + " moved to "+getName());
 	}
 }
