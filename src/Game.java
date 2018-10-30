@@ -61,9 +61,33 @@ public class Game {
     }
 
     
-    private void arrangePurchasableRents(Player player) {
-    	ArrayList<Purchasable> newList = new ArrayList<>(player.getPropertys());
+    private void arrangePurchasableRents(Purchasable purchasable) {
+    	ArrayList<Purchasable> tempSquares = new ArrayList<Purchasable>(purchasable.getOwner().getPropertys());
     	
+    	if( purchasable instanceof Property ) {
+    		if( purchasable.getOwner().hasAllColors((Property)purchasable)  ) {
+        		for(int i=0;i<tempSquares.size();i++) {
+        			if( tempSquares.get(i).getColor().equals( purchasable.getColor() )  ) {
+        				purchasable.getOwner().getPropertys().get(i).setRentPrice(tempSquares.get(i).getRentPrice()*2);
+        			}
+        		}
+        	}
+    	}else if( purchasable instanceof Transportation ) {
+    		int howMany=purchasable.getOwner().howManyTransportation();
+    		for(int i=0;i<tempSquares.size();i++) {
+    			if( tempSquares.get(i) instanceof Transportation ) {
+    				purchasable.getOwner().getPropertys().get(i).setRentPrice( tempSquares.get(i).getRentPrice()*howMany);
+    			}
+    		}
+    	}else {
+    		if(purchasable.getOwner().hasAllFirm()) {
+    			for(int i=0;i<tempSquares.size();i++) {
+    				if( tempSquares.get(i) instanceof Firm ) {
+    					purchasable.getOwner().getPropertys().get(i).setRentPrice( 100 );
+    				}
+    			}
+    		}
+    	}
     }
     
     //teleport user when take luck cards
