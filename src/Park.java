@@ -7,4 +7,10 @@ public class Park extends UnSalable{
 	public void Speak(Player player){
 		System.out.println(player.getName() + " moved to "+getName());
 	}
+	@Override
+	public void event(Player player) {
+		// TODO Auto-generated method stub
+		return;
+	}
+	
 }

@@ -41,10 +41,6 @@ public class Game {
         int prevPosition = player.getCurrentPosition(); //keep previous position
         player.setCurrentPosition((player.getCurrentPosition() +diceNumber) % 40);  //add the dice curren position
         if (player.getCurrentPosition() < prevPosition) player.addBalance(2000); //if player pass the start point earn tour money
-        if (player.getCurrentPosition() == 30) { //if player move to jail zone
-            player.setPrison(true);
-            player.setCurrentPosition(10);
-        }
 
         SquareEvent(player);
     }
@@ -64,6 +60,12 @@ public class Game {
         }
     }
 
+    
+    private void arrangePurchasableRents(Player player) {
+    	ArrayList<Purchasable> newList = new ArrayList<>(player.getPropertys());
+    	
+    }
+    
     //teleport user when take luck cards
     private void teleport(Player player,int position) {
         player.setCurrentPosition(position);
@@ -136,9 +138,6 @@ public class Game {
             move(players.get(i),totalDice);
 
         }
-
-
-
     }
 
     private void buySaleable(Player player,Purchasable saleable){

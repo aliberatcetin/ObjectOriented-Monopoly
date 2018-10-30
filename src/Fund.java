@@ -8,5 +8,14 @@ public class Fund extends UnSalable{
 	public void Speak(Player player) {
 		System.out.println(player.getName() +" comes "+getName());
 	}
+
+	@Override
+	public void event(Player player) {
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }
 

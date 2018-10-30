@@ -8,10 +8,5 @@ public class Map {
     
     public Square getSquare(int position) {
     	return Map.getSquare(position);
-    }
-    
-    
-   
-    
-    
+    } 
 }

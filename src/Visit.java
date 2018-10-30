@@ -12,4 +12,9 @@ public class Visit extends UnSalable{
 			System.out.println(player.getName() + " is visiting someone ");
 		}
 	}
+	@Override
+	public void event(Player player) {
+		// TODO Auto-generated method stub
+		return;
+	}
 }

@@ -8,4 +8,10 @@ public class Start extends UnSalable{
 	public void Speak(Player player) {
 		System.out.println(player.getName() +" passed start point " + " will receive 2000 ");
 	}
+
+	@Override
+	public void event(Player player) {
+		player.addBalance(2000);
+	}
+	
 }
