@@ -2,7 +2,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class Game {
+	public enum intention{
+		ADD,REMOVE;
+	}
+	
     private String playerName;
     private ArrayList<Player> players = new ArrayList<Player>();
     private Scanner scan =new Scanner(System.in);
@@ -64,14 +70,32 @@ public class Game {
     }
 
     
-    private void arrangePurchasableRents(Purchasable purchasable) {
+    private void breakColorSet(Purchasable purchasable) {
     	ArrayList<Purchasable> tempSquares = new ArrayList<Purchasable>(purchasable.getOwner().getPropertys());
-    	
     	if( purchasable instanceof Property ) {
     		if( purchasable.getOwner().hasAllColors((Property)purchasable)  ) {
         		for(int i=0;i<tempSquares.size();i++) {
         			if( tempSquares.get(i).getColor().equals( purchasable.getColor() )  ) {
-        				purchasable.getOwner().getPropertys().get(i).setRentPrice(tempSquares.get(i).getRentPrice()*2);
+        				purchasable.getOwner().getPropertys().get(i).setRentPrice(tempSquares.get(i).getRentPrice()/2);
+        			}
+        		}
+        	}
+    	}
+    }
+    
+    private void arrangePurchasableRents(Purchasable purchasable,intention intention) {
+    	ArrayList<Purchasable> tempSquares = new ArrayList<Purchasable>(purchasable.getOwner().getPropertys());
+    	double increaseRate;
+    	if( intention.ordinal()==0) {
+    		increaseRate=2.0;
+    	}else {
+    		increaseRate=0.5;
+    	}
+    	if( purchasable instanceof Property ) {
+    		if( purchasable.getOwner().hasAllColors((Property)purchasable)  ) {
+        		for(int i=0;i<tempSquares.size();i++) {
+        			if( tempSquares.get(i).getColor().equals( purchasable.getColor() )  ) {
+        				purchasable.getOwner().getPropertys().get(i).setRentPrice((int)(tempSquares.get(i).getRentPrice()*increaseRate));
         			}
         		}
         	}
@@ -79,7 +103,7 @@ public class Game {
     		int howMany=purchasable.getOwner().howManyTransportation();
     		for(int i=0;i<tempSquares.size();i++) {
     			if( tempSquares.get(i) instanceof Transportation ) {
-    				purchasable.getOwner().getPropertys().get(i).setRentPrice( tempSquares.get(i).getRentPrice()*howMany);
+    				purchasable.getOwner().getPropertys().get(i).setRentPrice( 250*howMany);
     			}
     		}
     	}else {
@@ -186,7 +210,8 @@ public class Game {
             saleable.setOwner(player);
             saleable.setSold(true);
             System.out.print(player.getName()+" is purchase "+saleable.getName()+ "("+saleable.getPurchasePrice()+ "$)"+ ".");
-            arrangePurchasableRents(saleable);
+            intention intent = intention.ADD;
+            arrangePurchasableRents(saleable,intent);
         }
         }else{
             System.out.println(player.getName()+"cant buy "+saleable.getName()+" Its expensive.");
@@ -195,6 +220,7 @@ public class Game {
     }
 
     private void sellSaleable(Player player,Purchasable saleable){
+    	arrangePurchasableRents(saleable,intention.REMOVE);
         player.addBalance(saleable.getHypothecPrice());
         player.removeProperty(saleable);
         saleable.setSold(false);
@@ -229,6 +255,7 @@ public class Game {
             }else{
                 System.out.println(player.getName()+ " go bankrupt.");
                 players.remove(player);
+                break;
             }
 
         }
