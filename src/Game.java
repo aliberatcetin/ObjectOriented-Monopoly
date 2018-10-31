@@ -40,7 +40,10 @@ public class Game {
     private void move(Player player ,int diceNumber) {
         int prevPosition = player.getCurrentPosition(); //keep previous position
         player.setCurrentPosition((player.getCurrentPosition() +diceNumber) % 40);  //add the dice curren position
-        if (player.getCurrentPosition() < prevPosition) player.addBalance(2000); //if player pass the start point earn tour money
+        if (player.getCurrentPosition() < prevPosition){
+            System.out.print(player.getName()+"passed start point.Received 2000$");
+            player.addBalance(2000); //if player pass the start point earn tour money
+        }
 
         SquareEvent(player);
     }
@@ -131,6 +134,8 @@ public class Game {
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
+            System.out.println(players.get(i).getName()+"'s Balance: $"+players.get(i).getBalance());
+            players.get(i).speak();
 
         }
 
@@ -140,7 +145,8 @@ public class Game {
         totalDice=dices[0]+dices[1];
         System.out.print(players.get(players.size()-1).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
         move(players.get(players.size()-1),totalDice);
-
+        System.out.println(players.get(players.size()-1).getName()+"'s Balance: $"+players.get(players.size()-1).getBalance());
+        players.get(players.size()-1).speak();
 
     }
 
@@ -154,13 +160,16 @@ public class Game {
         totalDice=dices[0]+dices[1];
         System.out.print(players.get(0).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
         move(players.get(0),totalDice);
+        System.out.println(players.get(0).getName()+"'s Balance: $"+players.get(0).getBalance());
+        players.get(0).speak();
 
         for (int i = 1; i <players.size() ; i++) {
             dices=rollDices();
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
-
+            System.out.println(players.get(i).getName()+"'s Balance: $"+players.get(i).getBalance());
+            players.get(i).speak();
         }
     }
 
@@ -177,7 +186,7 @@ public class Game {
             saleable.setOwner(player);
             saleable.setSold(true);
             System.out.print(player.getName()+" is purchase "+saleable.getName()+ "("+saleable.getPurchasePrice()+ "$)"+ ".");
-            System.out.println(player.getName()+"'s Balance:"+player.getBalance());
+            arrangePurchasableRents(saleable);
         }
         }else{
             System.out.println(player.getName()+"cant buy "+saleable.getName()+" Its expensive.");
@@ -219,6 +228,7 @@ public class Game {
 
             }else{
                 System.out.println(player.getName()+ " go bankrupt.");
+                players.remove(player);
             }
 
         }
@@ -239,6 +249,7 @@ public class Game {
             else{
                 RoundLastPlayer();
             }
+
 
             currentRound++;
             System.out.println("-------------------------------");

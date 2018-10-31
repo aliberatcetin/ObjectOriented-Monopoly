@@ -25,9 +25,9 @@ public class Purchasable extends Square {
 	public void Speak(Player player2) {
 		if ( isSold ) {
 			System.out.print(player2.getName()+" moved to " + getName() );
-			System.out.print(player2.getName() + " will pay rent("+ RentPrice +"$)"  + owner.getName());
+			System.out.print(player2.getName()+"("+getPosition()+")" + " will pay rent("+ RentPrice +"$)"  + owner.getName());
 		}else {
-			System.out.print(player2.getName()+" moved to " + getName() );
+			System.out.print(player2.getName()+" moved to " + getName()+"("+getPosition()+"). " );
 		}
 	}
 	

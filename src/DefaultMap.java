@@ -30,7 +30,7 @@ public class DefaultMap{
 		addSquare( createFund	       (2,"fund","transparent") );
 		addSquare( createProperty	   (3,"mecidiyekoy","brown",40,600,300,2));
 		addSquare( createTax           (4,"tax","transparent",2000) );
-		addSquare( createTransportation(5,"tramline","brown",250,2,1000,4));
+		addSquare( createTransportation(5,"tramline","transparent",250,2000,1000,4));
 		addSquare( createProperty      (6,"anadoluhisari","skyblue",60,1000,500,3));
 		addSquare( createChance        (7,"chance","transparent") );
 		addSquare( createProperty      (8,"beylerbeyi","skyblue",60,1000,500,3));
@@ -64,8 +64,7 @@ public class DefaultMap{
 		addSquare( createChance        (36,"chance","transparent") );
 		addSquare( createProperty      (37,"levent","blue",350,3500,1750,2)  );
 		addSquare( createTax           (38,"tax","transparent",1000) );
-		addSquare( createProperty      (39,"etiler","blue",500,4000,2000,2)  );	
-		System.out.print("map created");
+		addSquare( createProperty      (39,"etiler","blue",500,4000,2000,2)  );
 
 	}
 	
