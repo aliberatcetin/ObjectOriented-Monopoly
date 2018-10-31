@@ -8,13 +8,10 @@ public class main {
 
         System.out.println("Oyuna hoşgeldin paşam adın nedir?");
         String name=scan.next();
-
         System.out.println("kaç kişi oynucan paşam(2-6)");
-        int numberofPlayer=scan.nextInt();
-        //Map board = new Map();
-        Game game=new Game(name,numberofPlayer);
-        
-        game.run(100);
+        Game game=new Game(name,scan.nextInt());
+        System.out.println("Kaç tur Oynucam Paşam");
+        game.run(scan.nextInt());
     }
 
 }
