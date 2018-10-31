@@ -108,4 +108,10 @@ public class Player {
     public void setCurrentPosition(int currentPosition) {
         this.currentPosition = currentPosition;
     }
+
+    public void speak(){
+        for (int i = 0; i <propertys.size() ; i++) {
+            System.out.println(i+1+"-"+propertys.get(i).getName()+"----"+propertys.get(i).getColor()+"----"+propertys.get(i).getRentPrice());
+        }
+    }
 }

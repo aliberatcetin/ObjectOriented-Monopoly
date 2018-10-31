@@ -10,8 +10,7 @@ public class Start extends UnSalable{
 	}
 
 	@Override
-	public void event(Player player) {
-		player.addBalance(2000);
+	public void event(Player player){
 	}
 	
 }

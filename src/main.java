@@ -14,7 +14,7 @@ public class main {
         //Map board = new Map();
         Game game=new Game(name,numberofPlayer);
         
-        game.run(10);
+        game.run(100);
     }
 
 }
