@@ -7,8 +7,8 @@ public class Tax extends UnSalable{
 	}
 	@Override
 	public void Speak(Player player) {
-		System.out.print(player.getName()+" moved to "+getName());
-		System.out.println(player.getName() +" will pay " + this.Tax+ " to the bank" );
+		System.out.print(player.getName()+"moved to"+getName());
+		System.out.println(player.getName() +"will pay " + this.Tax+ "to the bank" );
 	}
 	public int getTax() {
 		return Tax;

@@ -6,7 +6,7 @@ public class Start extends UnSalable{
 	
 	@Override
 	public void Speak(Player player) {
-		System.out.println(player.getName() +" passed start point " + " will receive 2000 ");
+		System.out.println(player.getName() +"passed start point" + "will receive 2000");
 	}
 
 	@Override

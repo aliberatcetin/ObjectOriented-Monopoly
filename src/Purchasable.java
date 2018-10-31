@@ -24,10 +24,15 @@ public class Purchasable extends Square {
 	@Override
 	public void Speak(Player player2) {
 		if ( isSold ) {
+<<<<<<< HEAD
 			System.out.print(player2.getName()+" moved to " + getName() );
 			System.out.print(player2.getName() + " will pay rent("+ RentPrice +"$)"  + owner.getName());
+=======
+			System.out.print(player2.getName()+"moved to" + getName() );
+			System.out.println(player2.getName() + "will pay the rent to the" + owner);
+>>>>>>> parent of 81f0605... Merge branch 'aliberatcetin' of https://github.com/rgulcu1/cse3063f18p1_rgulcu_abcetin into Ridvan
 		}else {
-			System.out.print(player2.getName()+" moved to " + getName() );
+			System.out.print(player2.getName()+"moved to" + getName() );
 		}
 	}
 	
