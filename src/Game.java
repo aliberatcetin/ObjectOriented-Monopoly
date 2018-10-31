@@ -146,10 +146,11 @@ public class Game {
         for (int i = 0; i <players.size()-1 ; i++) {
             do {
                 if(counterTwice>=3){
-                    System.out.print(players.get(i)+" roll double dice three time.Goes to prison.");
+                    System.out.print(players.get(i).getName()+" roll double dice three time.Goes to prison.");
                     players.get(i).setCurrentPosition(10);
                     counterTwice=0;
                     checkTwice=false;
+                    break;
                 }
             dices=rollDices();
             totalDice=dices[0]+dices[1];
@@ -162,10 +163,11 @@ public class Game {
 
         do {
             if(counterTwice>=3){
-                System.out.print(players.get(players.size()-1)+" roll double dice three time.Goes to prison.");
+                System.out.print(players.get(players.size()-1).getName()+" roll double dice three time.Goes to prison.");
                 players.get(players.size()-1).setCurrentPosition(10);
                 counterTwice=0;
                 checkTwice=false;
+                break;
             }
         System.out.println("Press any button to roll a dice");
         scan.next();
@@ -184,10 +186,11 @@ public class Game {
 
         do {
             if(counterTwice>=3){
-                System.out.print(players.get(0)+" roll double dice three time.Goes to prison.");
+                System.out.print(players.get(0).getName()+" roll double dice three time.Goes to prison.");
                 players.get(0).setCurrentPosition(10);
                 counterTwice=0;
                 checkTwice=false;
+                break;
             }
             System.out.println("Press any button to roll a dice");
             scan.next();
@@ -203,10 +206,11 @@ public class Game {
         for (int i = 1; i <players.size() ; i++) {
             do {
                 if(counterTwice>=3){
-                    System.out.print(players.get(i)+" roll double dice three time.Goes to prison.");
+                    System.out.print(players.get(i).getName()+" roll double dice three time.Goes to prison.");
                     players.get(i).setCurrentPosition(10);
                     counterTwice=0;
                     checkTwice=false;
+                    break;
                 }
             dices=rollDices();
             totalDice=dices[0]+dices[1];
@@ -267,7 +271,7 @@ public class Game {
                 }else{
                     System.out.println("which property you want to sell ?");
                     for (int i = 0; i <player.getPropertys().size() ; i++) {
-                        System.out.println(i+"-"+player.getPropertys().get(i).getName()+"("+player.getPropertys().get(i).getHypothecPrice()+"$)");
+                        System.out.println(i+1+"-"+player.getPropertys().get(i).getName()+"("+player.getPropertys().get(i).getHypothecPrice()+"$)");
                     }
                     sellSaleable(player,player.getPropertys().get(scan.nextInt()));
                 }
