@@ -10,7 +10,6 @@ public class Park extends UnSalable{
 	@Override
 	public void event(Player player) {
 		// TODO Auto-generated method stub
-		return;
 	}
 	
 }
