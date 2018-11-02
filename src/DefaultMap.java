@@ -3,16 +3,16 @@ import java.util.List;
 
 public class DefaultMap{
 	
-	protected List<Square> Squares = new ArrayList<Square>();
+	private List<Square> Squares = new ArrayList<Square>();
 	
 	public DefaultMap(){}
 	
-	public Square createProperty(int position,String name,String color,int rentprice,int purchaseprice,int hypothecprice,int tn) {
+	private Square createProperty(int position,String name,String color,int rentprice,int purchaseprice,int hypothecprice,int tn) {
 		// TODO Auto-generated method stub
 		return new Property(position,name,color,rentprice,purchaseprice,hypothecprice,tn);
 	}
 
-	public void addSquare(Square square) {
+	private void addSquare(Square square) {
 		Squares.add( square );
 	}
 	
@@ -69,49 +69,49 @@ public class DefaultMap{
 	}
 	
 
-	public Square createTransportation(int position, String name, String color, int rentprice, int purchaseprice,
+	private Square createTransportation(int position, String name, String color, int rentprice, int purchaseprice,
 			int hypothecprice,int tn) {
 		// TODO Auto-generated method stub
 		return new Transportation(position,name,color,rentprice,purchaseprice,hypothecprice,tn);
 	}
 
-	public Square createFirm(int position, String name, String color, int rentprice, int purchaseprice,
+	private Square createFirm(int position, String name, String color, int rentprice, int purchaseprice,
 			int hypothecprice,int tn) {
 		// TODO Auto-generated method stub
 		return new Firm(position,name,color,rentprice,purchaseprice,hypothecprice,tn);
 	}
 
-	public Square createTax(int position, String color, String name,int tax) {
+	private Square createTax(int position, String color, String name,int tax) {
 		// TODO Auto-generated method stub
 		return new Tax(position,color,name,tax);
 	}
 
-	public Square createChance(int position, String color, String name) {
+	private Square createChance(int position, String color, String name) {
 		// TODO Auto-generated method stub
 		return new Chance(position,color,name);
 	}
 
-	public Square createFund(int position, String color, String name) {
+	private Square createFund(int position, String color, String name) {
 		// TODO Auto-generated method stub
 		return new Fund(position,color,name);
 	}
 
-	public Square createPark(int position, String color, String name) {
+	private Square createPark(int position, String color, String name) {
 		// TODO Auto-generated method stub
 		return new Park(position,color,name);
 	}
 
-	public Square createVisit(int position, String color, String name) {
+	private Square createVisit(int position, String color, String name) {
 		// TODO Auto-generated method stub
 		return new Visit(position,color,name);
 	}
 
-	public Square createJail(int position, String color, String name) {
+	private Square createJail(int position, String color, String name) {
 		// TODO Auto-generated method stub
 		return new Jail(position,color,name);
 	}
 
-	public Square createStart(int position, String color, String name) {
+	private Square createStart(int position, String color, String name) {
 		// TODO Auto-generated method stub
 		return new Start(position,color,name);
 	}

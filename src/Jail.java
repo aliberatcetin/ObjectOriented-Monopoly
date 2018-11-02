@@ -9,6 +9,7 @@ public class Jail extends UnSalable{
 		// TODO Auto-generated method stub
 		player.setCurrentPosition(10);
 		player.setPrison(true);
+		player.reduceBalance(2000);
 	}
 	
 	

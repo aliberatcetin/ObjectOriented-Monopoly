@@ -8,12 +8,11 @@ public class Game {
     public enum intention{
         ADD,REMOVE;
     }
-
+    private boolean checkTwice=false;
+    private int counterTwice=0;
     private String playerName;
     private ArrayList<Player> players = new ArrayList<Player>();
     private Scanner scan =new Scanner(System.in);
-    //DefaultMap md = new DefaultMap();
- 
     private Map board = new Map();
     
 
@@ -40,7 +39,16 @@ public class Game {
     }
 
     private int[] rollDices(){
-        return new int[] {(int) (Math.random() * 6 + 1), (int) (Math.random() * 6 + 1)};
+        int dice1=(int) (Math.random() * 6 + 1);
+        int dice2=(int) (Math.random() * 6 + 1);
+        if(dice1==dice2){
+            counterTwice++;
+            checkTwice=true;
+        }else{
+            counterTwice=0;
+            checkTwice=false;
+        }
+        return new int[] {dice1, dice2};
     }
 
     private void move(Player player ,int diceNumber) {
@@ -136,15 +144,31 @@ public class Game {
         int dices[];
         int totalDice;
         for (int i = 0; i <players.size()-1 ; i++) {
+            do {
+                if(counterTwice>=3){
+                    System.out.print(players.get(i).getName()+" roll double dice three time.Goes to prison.");
+                    players.get(i).setCurrentPosition(10);
+                    counterTwice=0;
+                    checkTwice=false;
+                    break;
+                }
             dices=rollDices();
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
             System.out.println(players.get(i).getName()+"'s Balance: $"+players.get(i).getBalance());
             players.get(i).speak();
-
+            }while (checkTwice);
         }
 
+        do {
+            if(counterTwice>=3){
+                System.out.print(players.get(players.size()-1).getName()+" roll double dice three time.Goes to prison.");
+                players.get(players.size()-1).setCurrentPosition(10);
+                counterTwice=0;
+                checkTwice=false;
+                break;
+            }
         System.out.println("Press any button to roll a dice");
         scan.next();
         dices=rollDices();
@@ -153,29 +177,49 @@ public class Game {
         move(players.get(players.size()-1),totalDice);
         System.out.println(players.get(players.size()-1).getName()+"'s Balance: $"+players.get(players.size()-1).getBalance());
         players.get(players.size()-1).speak();
-
+        }while (checkTwice);
     }
 
     private void RoundFirstPlayer(){
         int dices[];
         int totalDice;
 
-        System.out.println("Press any button to roll a dice");
-        scan.next();
-        dices=rollDices();
-        totalDice=dices[0]+dices[1];
-        System.out.print(players.get(0).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
-        move(players.get(0),totalDice);
-        System.out.println(players.get(0).getName()+"'s Balance: $"+players.get(0).getBalance());
-        players.get(0).speak();
+        do {
+            if(counterTwice>=3){
+                System.out.print(players.get(0).getName()+" roll double dice three time.Goes to prison.");
+                players.get(0).setCurrentPosition(10);
+                counterTwice=0;
+                checkTwice=false;
+                break;
+            }
+            System.out.println("Press any button to roll a dice");
+            scan.next();
+            dices=rollDices();
+            totalDice=dices[0]+dices[1];
+            System.out.print(players.get(0).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
+            move(players.get(0),totalDice);
+            System.out.println(players.get(0).getName()+"'s Balance: $"+players.get(0).getBalance());
+            players.get(0).speak();
+        }while (checkTwice);
+
 
         for (int i = 1; i <players.size() ; i++) {
+            do {
+                if(counterTwice>=3){
+                    System.out.print(players.get(i).getName()+" roll double dice three time.Goes to prison.");
+                    players.get(i).setCurrentPosition(10);
+                    counterTwice=0;
+                    checkTwice=false;
+                    break;
+                }
             dices=rollDices();
             totalDice=dices[0]+dices[1];
             System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
             move(players.get(i),totalDice);
             System.out.println(players.get(i).getName()+"'s Balance: $"+players.get(i).getBalance());
             players.get(i).speak();
+            }while (checkTwice);
+
         }
     }
 
@@ -227,7 +271,7 @@ public class Game {
                 }else{
                     System.out.println("which property you want to sell ?");
                     for (int i = 0; i <player.getPropertys().size() ; i++) {
-                        System.out.println(i+"-"+player.getPropertys().get(i).getName()+"("+player.getPropertys().get(i).getHypothecPrice()+"$)");
+                        System.out.println(i+1+"-"+player.getPropertys().get(i).getName()+"("+player.getPropertys().get(i).getHypothecPrice()+"$)");
                     }
                     sellSaleable(player,player.getPropertys().get(scan.nextInt()));
                 }
@@ -240,7 +284,17 @@ public class Game {
 
         }
     }
-
+    private void findWinner(){
+        Player winner=null;
+        int maxBalance=0;
+        for (int i= 0; i <players.size() ; i++) {
+            if(players.get(i).getBalance()>maxBalance){
+                maxBalance=players.get(i).getBalance();
+                winner=players.get(i);
+            }
+        }
+        System.out.println("The winner is "+winner.getName());
+    }
 
     public void run(int roundNumber){
         boolean checkPlayer=false;
@@ -250,18 +304,21 @@ public class Game {
 
         while(currentRound<=roundNumber){
             checkBalances();
-            if(checkPlayer){
-                RoundFirstPlayer();
+            if(players.size()>1){
+                if(checkPlayer){
+                    RoundFirstPlayer();
+                }
+                else{
+                    RoundLastPlayer();
+                }
+            }else{
+                break;
             }
-            else{
-                RoundLastPlayer();
-            }
-
 
             currentRound++;
             System.out.println("-------------------------------");
         }
-
+        findWinner();
     }
 
 }

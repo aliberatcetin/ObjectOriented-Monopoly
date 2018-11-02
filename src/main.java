@@ -6,15 +6,12 @@ public class main {
     public static void main(String[] args) {
          Scanner scan =new Scanner(System.in);
 
-        System.out.println("Oyuna hoşgeldin paşam adın nedir?");
+        System.out.println("Welcome to Monopoly Game.What is your Name?");
         String name=scan.next();
-
-        System.out.println("kaç kişi oynucan paşam(2-6)");
-        int numberofPlayer=scan.nextInt();
-        //Map board = new Map();
-        Game game=new Game(name,numberofPlayer);
-        
-        game.run(100);
+        System.out.println("Enter number of Player(2-6):");
+        Game game=new Game(name,scan.nextInt());
+        System.out.println("Enter number of round:");
+        game.run(scan.nextInt());
     }
 
 }
