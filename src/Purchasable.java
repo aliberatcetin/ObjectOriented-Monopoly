@@ -1,12 +1,13 @@
-
+//purchasable class represents the purchasable types of monopoly squares.
 public class Purchasable extends Square {
 	private int RentPrice;
 	private int PurchasePrice;
 	private int HypothecPrice;
 	private Player owner;
-	private boolean isSold;
-	private int totalNeighbor;
-	
+	private boolean isSold;//does this property belongs a player or not
+	private int totalNeighbor;//the max neighbor of a property. E.g. yellow properties have 3 neighbor at max.
+
+
 	public int getTotalNeighbor() {
 		return totalNeighbor;
 	}
@@ -44,7 +45,7 @@ public class Purchasable extends Square {
 	}
 	
 
-	
+	//getters and setters
 	public int getRentPrice() {
 		return RentPrice;
 	}

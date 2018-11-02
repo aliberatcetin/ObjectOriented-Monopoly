@@ -1,4 +1,4 @@
-
+//square class to represent the attributes and functionalities of "squares" of the monopoly game.
 public abstract class Square {
 	
 	private int Position;
@@ -10,10 +10,13 @@ public abstract class Square {
 		this.Color=color;
 		this.Name=name;
 	}
-	
+
+	//when a player comes in a square, game class calls this method.
+    //it prints the player name, square name and the event will happen.
 	public abstract void Speak(Player player);
 
 
+	//getters and setters
 	public int getPosition() {
 		return Position;
 	}
