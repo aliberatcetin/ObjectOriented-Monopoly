@@ -5,7 +5,7 @@ public class Firm extends Purchasable{
 		super(position,name,color,rentprice,purchaseprice,hypothecprice,tn);
 	}
 	
-	
+	//getter
 	public int getRentPrice() {
 		int dice1 = (int) (Math.random() * 6 + 1);
 		int dice2 = (int) (Math.random() * 6 + 1);

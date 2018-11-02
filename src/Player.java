@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-
+//Player class for representing a player in game
 public class Player {
     private String name; //Player's name
     private int balance = 10000; //balance default value
@@ -30,6 +30,8 @@ public class Player {
         balance-=amount;
     }
 
+
+    //find if the player has all neighbors of a color.
     public boolean hasAllColors(Property prop) {
     	int counter=0;
     	for(int i=0;i<propertys.size();i++) {
@@ -44,7 +46,8 @@ public class Player {
     	}
     	
     }
-    
+
+    //returns how many transportation firm of player
     public int howManyTransportation() {
     	int counter=0;
     	for(int i=0;i<propertys.size();i++) {
@@ -54,6 +57,8 @@ public class Player {
     	}
     	return counter;
     }
+
+    //does this player have all of the firms.
     public boolean hasAllFirm() {
     	int counter=0;
     	for(int i=0;i<propertys.size();i++) {
@@ -109,9 +114,14 @@ public class Player {
         this.currentPosition = currentPosition;
     }
 
+    //speak method for printing player's propertys
     public void speak(){
-        for (int i = 0; i <propertys.size() ; i++) {
-            System.out.println(i+1+"-"+propertys.get(i).getName()+"----"+propertys.get(i).getColor()+"----"+propertys.get(i).getRentPrice());
+        if(propertys.size()>0){
+            System.out.println(name+"'s Propertys:");
+            for (int i = 0; i <propertys.size() ; i++) {
+                System.out.println(i+1+"-"+propertys.get(i).getName()+"----"+propertys.get(i).getColor()+"----"+propertys.get(i).getRentPrice());
+            }
         }
+
     }
 }
