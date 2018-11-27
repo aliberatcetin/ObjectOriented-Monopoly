@@ -9,7 +9,7 @@ public class Tax extends UnSalable{
 	@Override
 	public void Speak(Player player) {
 		System.out.print(player.getName()+" moved to "+getName()+"("+getPosition()+"). ");
-		System.out.println(player.getName() +" will pay " + this.Tax+ " to the bank" );
+		System.out.print(player.getName() +" will pay " + this.Tax+ " to the bank. " );
 	}
 
 	//getters setters

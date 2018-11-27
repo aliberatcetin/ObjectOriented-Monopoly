@@ -12,5 +12,8 @@ public class Firm extends Purchasable{
 		int diceSum = dice1 + dice2;
 		return diceSum * super.getRentPrice();
 	}
+	//getdefaul rent price method
+	//todo
+
 	
 }

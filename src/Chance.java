@@ -6,7 +6,7 @@ public class Chance extends UnSalable{
 	}
 	@Override
 	public void Speak(Player player) {
-		System.out.print(player.getName() +" comes "+getName());
+		System.out.print(player.getName() +" comes "+getName()+"("+getPosition()+"). ");
 	}
 	@Override
 	public void event(Player player) {

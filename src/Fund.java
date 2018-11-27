@@ -7,7 +7,7 @@ public class Fund extends UnSalable{
 	
 	@Override
 	public void Speak(Player player) {
-		System.out.println(player.getName() +" comes"+getName()+".");
+		System.out.print(player.getName() +" comes "+getName()+"("+getPosition() +"). ");
 	}
 
 	@Override

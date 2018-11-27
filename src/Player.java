@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 //Player class for representing a player in game
@@ -119,9 +120,38 @@ public class Player {
         if(propertys.size()>0){
             System.out.println(name+"'s Propertys:");
             for (int i = 0; i <propertys.size() ; i++) {
-                System.out.println(i+1+"-"+propertys.get(i).getName()+"----"+propertys.get(i).getColor()+"----"+propertys.get(i).getRentPrice());
+
+                switch (propertys.get(i).getColor()){
+                    case "RED":
+                        System.out.print(Color.RED);
+                        break;
+                    case "ORANGE":
+                        System.out.print(Color.ORANGE);
+                        break;
+                    case "BLUE":
+                        System.out.print(Color.BLUE);
+                        break;
+                    case "GREEN":
+                        System.out.print(Color.GREEN);
+                        break;
+                    case "PINK":
+                        System.out.print(Color.PINK);
+                        break;
+                    case "SKYBLUE":
+                        System.out.print(Color.SKYBLUE);
+                        break;
+                    case "BROWN":
+                        System.out.print(Color.WHITE);
+                        break;
+                    case "TRANSPARENT":
+                        System.out.print(Color.BLACK);
+                        break;
+                }
+
+
+                System.out.println(i+1+"-"+propertys.get(i).getName()+"----"+propertys.get(i).getColor()+"----"+propertys.get(i).getRentPrice()+Color.RESET);
             }
         }
-
+        System.out.println();
     }
 }
