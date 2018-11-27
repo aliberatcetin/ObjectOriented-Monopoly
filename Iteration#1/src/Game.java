@@ -55,7 +55,7 @@ public class Game {
         int prevPosition = player.getCurrentPosition(); //keep previous position
         player.setCurrentPosition((player.getCurrentPosition() +diceNumber) % 40);  //add the dice curren position
         if (player.getCurrentPosition() < prevPosition){
-            System.out.print(player.getName()+" passed start point. Received 2000$. ");
+            System.out.print(player.getName()+"passed start point.Received 2000$");
             player.addBalance(2000); //if player pass the start point earn tour money
         }
 
@@ -168,9 +168,9 @@ public class Game {
                 System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
                 move(players.get(i),totalDice);
                 System.out.println(players.get(i).getName()+"'s Balance: $"+players.get(i).getBalance());
-
+                players.get(i).speak();
             }while (checkTwice); //if player roll twice dice play again
-            players.get(i).speak();
+            System.out.println();
         }
     }
 
@@ -187,11 +187,11 @@ public class Game {
             player.addProperty(saleable); //add the property to player's propertys
             saleable.setOwner(player); // set the property owner
             saleable.setSold(true); //SETSold become tru for Property
-            System.out.print(player.getName()+" is purchase "+saleable.getName()+ "("+saleable.getPurchasePrice()+ "$)"+ ". ");
+            System.out.print(player.getName()+" is purchase "+saleable.getName()+ "("+saleable.getPurchasePrice()+ "$)"+ ".");
             arrangePurchasableRents(saleable,intention.ADD); //set the propertys rent price
         }
         }else{
-            System.out.print(player.getName()+" can't buy "+saleable.getName()+". His money is not enough.");
+            System.out.println(player.getName()+"cant buy "+saleable.getName()+" Its expensive.");
         }
 
     }
@@ -202,7 +202,6 @@ public class Game {
         player.addBalance(saleable.getHypothecPrice()); //add the player's balance for property's heypotech price
         player.removeProperty(saleable); //remove the property from user's propertys
         saleable.setSold(false); //setSold become false for property
-        arrangePurchasableRents(saleable,intention.REMOVE);
     }
 
     //use for payment Rent price
@@ -230,7 +229,7 @@ public class Game {
                     for (int i = 0; i <player.getPropertys().size() ; i++) {
                         System.out.println(i+1+"-"+player.getPropertys().get(i).getName()+"("+player.getPropertys().get(i).getHypothecPrice()+"$)");
                     }
-                    sellSaleable(player,player.getPropertys().get(scan.nextInt()+1));
+                    sellSaleable(player,player.getPropertys().get(scan.nextInt()));
                 }
 
             }else{ //if player has no property the player go bankrupt
@@ -259,7 +258,7 @@ public class Game {
         int currentRound=0;
         if(players.size()>1) decidePlayerOrder(); // decide player order
 
-        while(currentRound<roundNumber){
+        while(currentRound<=roundNumber){
             checkBalances();
             if(players.size()>1){
                 playOneRound(); //call play one round

@@ -13,9 +13,7 @@ public class Jail extends UnSalable{
 		player.setPrison(true);
 		player.reduceBalance(2000);
 	}
-
-	@Override
-	public void Speak(Player player) {
-		System.out.print(player.getName()+" is go to Jail.");
-	}
+	
+	
+	
 }
