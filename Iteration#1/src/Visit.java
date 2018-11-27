@@ -7,9 +7,9 @@ public class Visit extends UnSalable{
 	@Override
 	public void Speak(Player player) {
 		if(player.isPrison()) {
-			System.out.print(player.getName() + "is in prison now. ");
+			System.out.println(player.getName() + "is in prison now");
 		}else {
-			System.out.print(player.getName() + "is visiting someone. ");
+			System.out.println(player.getName() + "is visiting someone");
 		}
 	}
 	@Override
