@@ -9,7 +9,7 @@ public class Card {
 	}
 	
 	public String methodType() {
-		return cm.getLeg(cardType); 
+		return cm.getLeg(cardType);
 	}
 	
 	public void one(Player player) {
