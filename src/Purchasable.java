@@ -24,7 +24,7 @@ public class Purchasable extends Square {
 
 	@Override
 	public void Speak(Player player2) {
-		if ( isSold ) {
+		if ( isSold && !player2.getName().equals(owner.getName())) {
 			System.out.print(player2.getName()+" moved to " + getName() + "("+ getPosition()+"). " );
 			System.out.print(player2.getName()+" will pay rent("+ RentPrice +"$)"+" to "  + owner.getName()+". ");
 		}else {

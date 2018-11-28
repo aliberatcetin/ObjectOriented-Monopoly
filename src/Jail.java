@@ -16,6 +16,6 @@ public class Jail extends UnSalable{
 
 	@Override
 	public void Speak(Player player) {
-		System.out.print(player.getName()+" is go to Jail.");
+		System.out.print(player.getName()+" is go to Jail. Balance will be reduced $2000 for exit fee. ");
 	}
 }
