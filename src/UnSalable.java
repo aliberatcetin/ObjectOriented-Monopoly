@@ -9,7 +9,7 @@ public class UnSalable extends Square{
 	}
 
 	//the unsaleable squares have events to implement to a player.
-	public void event(Player player){
+	public void event(Player player) {
 		
 	}
 }

@@ -13,22 +13,18 @@ public class Game {
     private boolean checkTwice=false;   //for check dice twice
     private int counterTwice=0;         //for count dice twice
     private String playerName;          //for user's playername
-    private static ArrayList<Player> players = new ArrayList<Player>();  //for keep players
+    private ArrayList<Player> players = new ArrayList<Player>();  //for keep players
     private Scanner scan =new Scanner(System.in);   //define scanner
     private Map board = new Map();  //Create a default Map
+    
     //consrtuctor for Game class
     public Game(String playerName, int numOfPlayer) {
         createComputer(numOfPlayer); //create a players for computers depend on given input num of player
         players.add(createPlayer(playerName)); //create player for user
+        
     }
 
-    public static ArrayList<Player> getPlayers() {
-		return players;
-	}
-
-	
-
-	//create aplayer with given playername
+    //create aplayer with given playername
     private Player createPlayer(String name) {
         playerName=name;
         return new Player(name);
@@ -226,7 +222,7 @@ public class Game {
                 scan.next();
             }
                 System.out.print(player.getName()+" is roll dice :"+dices[0]+","+dices[1]);
-                System.out.print(player.getName()+" will pay rent("+ rentPrice +"$) to "  + saleable.getOwner().getName()+". ");
+                System.out.println(player.getName()+" will pay rent("+ rentPrice +"$) to "  + saleable.getOwner().getName()+". ");
 
         }
             player.reduceBalance(rentPrice);//reduce the balance of player which is do payment
