@@ -13,18 +13,22 @@ public class Game {
     private boolean checkTwice=false;   //for check dice twice
     private int counterTwice=0;         //for count dice twice
     private String playerName;          //for user's playername
-    private ArrayList<Player> players = new ArrayList<Player>();  //for keep players
+    private static ArrayList<Player> players = new ArrayList<Player>();  //for keep players
     private Scanner scan =new Scanner(System.in);   //define scanner
     private Map board = new Map();  //Create a default Map
-    
     //consrtuctor for Game class
     public Game(String playerName, int numOfPlayer) {
         createComputer(numOfPlayer); //create a players for computers depend on given input num of player
         players.add(createPlayer(playerName)); //create player for user
-        
     }
 
-    //create aplayer with given playername
+    public static ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	
+
+	//create aplayer with given playername
     private Player createPlayer(String name) {
         playerName=name;
         return new Player(name);
