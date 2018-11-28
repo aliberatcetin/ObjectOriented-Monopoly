@@ -226,7 +226,7 @@ public class Game {
                 scan.next();
             }
                 System.out.print(player.getName()+" is roll dice :"+dices[0]+","+dices[1]);
-                System.out.println(player.getName()+" will pay rent("+ rentPrice +"$) to "  + saleable.getOwner().getName()+". ");
+                System.out.print(player.getName()+" will pay rent("+ rentPrice +"$) to "  + saleable.getOwner().getName()+". ");
 
         }
             player.reduceBalance(rentPrice);//reduce the balance of player which is do payment
