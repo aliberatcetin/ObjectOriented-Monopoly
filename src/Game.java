@@ -13,18 +13,22 @@ public class Game {
     private boolean checkTwice=false;   //for check dice twice
     private int counterTwice=0;         //for count dice twice
     private String playerName;          //for user's playername
-    private ArrayList<Player> players = new ArrayList<Player>();  //for keep players
+    private static ArrayList<Player> players = new ArrayList<Player>();  //for keep players
     private Scanner scan =new Scanner(System.in);   //define scanner
     private Map board = new Map();  //Create a default Map
-    
     //consrtuctor for Game class
     public Game(String playerName, int numOfPlayer) {
         createComputer(numOfPlayer); //create a players for computers depend on given input num of player
         players.add(createPlayer(playerName)); //create player for user
-        
     }
 
-    //create aplayer with given playername
+    public static ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	
+
+	//create aplayer with given playername
     private Player createPlayer(String name) {
         playerName=name;
         return new Player(name);
@@ -70,7 +74,7 @@ public class Game {
         if(tempSquare instanceof Purchasable){  // check the suare is saleanle or unsaleable
         	if ( !(((Purchasable) tempSquare).isSold()) ){ //Check the square is sold before
                 buySaleable(player,(Purchasable)tempSquare);
-            }else{
+            }else if(!player.getName().equals(((Purchasable) tempSquare).getOwner().getName())){
                 doPayment(player,(Purchasable)tempSquare); //if square solded before do payment rentPrice
             }
         }else{
@@ -151,19 +155,22 @@ public class Game {
         int totalDice;
         for (int i = 0; i <players.size() ; i++) {
             do {
+                //rol dices and move the player
+                dices=rollDices();
                 if(players.get(i).getName().equals(playerName)){ // if the current player is a user program want the press any button for roll dices
                     System.out.println("Press any button to roll a dice");
                     scan.next();
                 }
                 if(counterTwice>=3){ //chechk twice dices for go to jail
-                    System.out.print(players.get(i).getName()+" roll double dice three time.Goes to prison.");
-                    players.get(i).setCurrentPosition(10);
+                    System.out.print(players.get(i).getName()+"is roll dice :"+dices[0]+","+dices[1]+". Roll double dice three time. ");
+                    players.get(i).setCurrentPosition(30);
+                    SquareEvent(players.get(i));
+                    System.out.println(players.get(i).getName()+"'s Balance: $"+players.get(i).getBalance());
                     counterTwice=0;
                     checkTwice=false;
                     break;
                 }
-                //rol dices and move the player
-                dices=rollDices();
+
                 totalDice=dices[0]+dices[1];
                 System.out.print(players.get(i).getName()+" is roll dice :"+dices[0]+","+dices[1]+". Move "+totalDice+" blocks.");
                 move(players.get(i),totalDice);
@@ -203,12 +210,28 @@ public class Game {
         player.removeProperty(saleable); //remove the property from user's propertys
         saleable.setSold(false); //setSold become false for property
         arrangePurchasableRents(saleable,intention.REMOVE);
+
+        System.out.println(player.getName()+" is hypotech the "+ saleable.getName()+". Earn $"+saleable.getHypothecPrice()+". Balance: $"+player.getBalance());
     }
 
     //use for payment Rent price
     private void doPayment(Player player,Purchasable saleable){
-        player.reduceBalance(saleable.getRentPrice());//reduce the baalance of player which is do payment
-        saleable.getOwner().addBalance(saleable.getRentPrice());//add the balance to property's owner
+        int rentPrice=saleable.getRentPrice();
+        if(saleable instanceof Firm){
+            int[] dices=rollDices();
+            int totalDice=dices[0]+dices[1];
+             rentPrice=saleable.getRentPrice()*totalDice;
+            if(player.getName().equals(playerName)){
+                System.out.println("Please roll to dice for determine rent price");
+                scan.next();
+            }
+                System.out.print(player.getName()+" is roll dice :"+dices[0]+","+dices[1]);
+                System.out.print(player.getName()+" will pay rent("+ rentPrice +"$) to "  + saleable.getOwner().getName()+". ");
+
+        }
+            player.reduceBalance(rentPrice);//reduce the balance of player which is do payment
+            saleable.getOwner().addBalance(rentPrice);//add the balance to property's owner
+
     }
     //use for check players balance
     private void checkBalances(){
@@ -230,7 +253,14 @@ public class Game {
                     for (int i = 0; i <player.getPropertys().size() ; i++) {
                         System.out.println(i+1+"-"+player.getPropertys().get(i).getName()+"("+player.getPropertys().get(i).getHypothecPrice()+"$)");
                     }
-                    sellSaleable(player,player.getPropertys().get(scan.nextInt()+1));
+
+                    try{
+                        sellSaleable(player,player.getPropertys().get(scan.nextInt()-1));
+                    }catch(Exception e){
+                        System.out.println("Your input is wrong. Please try again");
+                    }
+
+
                 }
 
             }else{ //if player has no property the player go bankrupt
@@ -244,10 +274,17 @@ public class Game {
     //use for find the winner
     private void findWinner(){
         Player winner=null;
+        int propertysValues=0;
+        int total=0;
         int maxBalance=0;
         for (int i= 0; i <players.size() ; i++) { //look for all user and decide winner player depend on player's balance
-            if(players.get(i).getBalance()>maxBalance){
-                maxBalance=players.get(i).getBalance();
+             propertysValues=0;
+            for (int j = 0; j <players.get(i).getPropertys().size() ; j++) {
+                propertysValues +=players.get(i).getPropertys().get(j).getHypothecPrice();
+            }
+            total=propertysValues+players.get(i).getBalance();
+            if(total>maxBalance){
+                maxBalance=total;
                 winner=players.get(i);
             }
         }
