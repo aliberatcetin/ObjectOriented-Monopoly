@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class Card {
+public class ChanceCards {
 	
 	int cardType;
-	cardType cm;
-	public Card(int cardType) {
+	CardType cm;
+	public ChanceCards(int cardType) {
 		this.cardType=cardType;
 	}
 	

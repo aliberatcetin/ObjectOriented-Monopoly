@@ -1,5 +1,5 @@
 
-public enum cardType {
+public enum CardType {
 	   one(1),
 	   two(2),
 	   three(3),
@@ -9,10 +9,10 @@ public enum cardType {
 	   
 	   private int cardIndex;
 
-	   private cardType(int cardIndex) { this.cardIndex = cardIndex; }
+	   private CardType(int cardIndex) { this.cardIndex = cardIndex; }
 
 	   public static String getLeg(int cardIndex) {
-	      for (cardType l : cardType.values()) {
+	      for (CardType l : CardType.values()) {
 	          if (l.cardIndex == cardIndex) return l.toString();
 	      }
 	      throw new IllegalArgumentException("fake");
