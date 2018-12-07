@@ -8,14 +8,12 @@ public class Chance extends UnSalable{
 	 
 	
 	
-	private List<Card> Cards = new ArrayList<Card>();
-	
-	
+	private List<ChanceCards> Cards = new ArrayList<ChanceCards>();
 	
 	public Chance(int position,String name,String color) {
 		super(position,name,color);
 		for(int i=0;i<6;i++) {
-			Cards.add(new Card(i+1));
+			Cards.add(new ChanceCards(i+1));
 		}
 	}
 	@Override
@@ -25,7 +23,7 @@ public class Chance extends UnSalable{
 	@Override
 	public void event(Player player) {
 		int randomCard=(int) (Math.random() * 6 );
-		Card c = Cards.get(randomCard);
+		ChanceCards c = Cards.get(randomCard);
 		try {
 			transaction(c,player);
 		} catch (Exception e) {
@@ -34,7 +32,7 @@ public class Chance extends UnSalable{
 		}
 		
 	}
-	public void transaction(Card card,Player player)throws Exception{
+	public void transaction(ChanceCards card,Player player)throws Exception{
         
         // Creating class object from the object using 
         // getclass method 
