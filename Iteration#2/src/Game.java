@@ -9,7 +9,6 @@ public class Game {
         ADD,REMOVE;
     }
 
-
     private boolean checkTwice=false;   //for check dice twice
     private int counterTwice=0;         //for count dice twice
     private String playerName;          //for user's playername
