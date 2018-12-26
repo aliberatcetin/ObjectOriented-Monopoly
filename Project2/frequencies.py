@@ -14,11 +14,8 @@ import operator
 from xlwt import Workbook
 from wordcloud import WordCloud
 
-
-
 stopwords = open("stopwords.txt", "r").read().split()
 
-'''
 url="https://muratcanganiz.com/"
 
 
@@ -78,7 +75,6 @@ while j< len(pdfLinks):
 	j+=1
 
 
-'''
 
 def splitText(string):
     '''stripped = re.sub('[^\w\s','',string)
@@ -147,8 +143,10 @@ for k in range(len(freqDict_list)):
 
 
 wb = Workbook()
+wb2 = Workbook()
 excelIndex=0
 sheet1 = wb.add_sheet('tf')
+sheet2 = wb2.add_sheet('tfidf')
 
 
 excelRow=0
@@ -166,6 +164,13 @@ for k in range(50):
 
 
 
+tfidf = {}
+
+
+for k in range(len(freqDict_list[0])):
+    tfidf[sorted_x[0][k][0]] = freqDict_list[0][sorted_x[0][k][0]] * math.log(len(articles))
+
+
 #imagelist.append(freq_ToImg)
 
 def makeImage(text,flag):
@@ -177,11 +182,17 @@ def makeImage(text,flag):
         image.save("tfidf_WordCloud.pdf")
 
 
-tfidf = {}
+sortedTFIDFList = sorted(tfidf.items(), key=operator.itemgetter(1), reverse=True)
+
+excelRow=0
+for i in range(50):
+    sheet2.write(excelRow, 0,sortedTFIDFList[i][0])
+    sheet2.write(excelRow, 1,sortedTFIDFList[i][1])
+    excelRow+=1
 
 
+makeImage(freq_ToImg,1)
+makeImage(tfidf,0)
 
-#makeImage(freq_ToImg,1)
-
-
-wb.save('ds.csv')
+wb.save('tf_list.csv')
+wb2.save('tf_idf_list.csv')
