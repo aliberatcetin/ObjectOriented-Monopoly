@@ -1,3 +1,3 @@
 # Monopoly Game Simulation
-+
-+Object Oriented Software Design Term Project
+
+Object Oriented Software Design Term Project
